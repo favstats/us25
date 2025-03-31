@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="How do political parties chase your vote, what do they want to keep hidden, and how much money do they spend on it? In the lead-up to the elections, we monitor political microtargeting.">
+
+<title>Detailed Targeting – US Targeting Dashboard</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./wtm_logo_2020_transparent-150x150.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
+<script src="site_libs/proj4js-2.3.15/proj4.js"></script>
+<link href="site_libs/highcharts-9.3.1/css/motion.css" rel="stylesheet">
+<script src="site_libs/highcharts-9.3.1/highcharts.js"></script>
+<script src="site_libs/highcharts-9.3.1/highcharts-3d.js"></script>
+<script src="site_libs/highcharts-9.3.1/highcharts-more.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/stock.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/map.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/data.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/exporting.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/offline-exporting.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/drilldown.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/item-series.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/overlapping-datalabels.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/annotations.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/export-data.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/funnel.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/heatmap.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/treemap.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/sankey.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/dependency-wheel.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/organization.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/solid-gauge.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/streamgraph.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/sunburst.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/vector.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/wordcloud.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/xrange.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/tilemap.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/venn.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/gantt.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/timeline.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/parallel-coordinates.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/bullet.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/coloraxis.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/dumbbell.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/lollipop.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/series-label.js"></script>
+<script src="site_libs/highcharts-9.3.1/plugins/motion.js"></script>
+<script src="site_libs/highcharts-9.3.1/custom/reset.js"></script>
+<script src="site_libs/highcharts-9.3.1/modules/boost.js"></script>
+<script src="site_libs/highchart-binding-0.9.4/highchart.js"></script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./wtm_logo_2020_transparent-300x300.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">US Targeting Dashboard</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://favstats.github.io/ep2024/map.html"> 
+<span class="menu-text"><iconify-icon inline="" icon="ph:map-trifold-thin" aria-label="Icon map-trifold-thin from ph Iconify.design set." title="Icon map-trifold-thin from ph Iconify.design set."></iconify-icon> Map</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text"><iconify-icon inline="" icon="ph:coins" aria-label="Icon coins from ph Iconify.design set." title="Icon coins from ph Iconify.design set."></iconify-icon> Spending</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-iconify-ph-users-three-thin--targeting" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text"><iconify-icon inline="" icon="ph:users-three-thin" aria-label="Icon users-three-thin from ph Iconify.design set." title="Icon users-three-thin from ph Iconify.design set."></iconify-icon> Targeting</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-iconify-ph-users-three-thin--targeting">    
+        <li>
+    <a class="dropdown-item" href="./targeting.html">
+ <span class="dropdown-text">Spending per Targeting</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./detailed.html">
+ <span class="dropdown-text">Detailed Targeting</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./demographics.html">
+ <span class="dropdown-text">Demographics</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text"><iconify-icon inline="" icon="ph:info-thin" aria-label="Icon info-thin from ph Iconify.design set." title="Icon info-thin from ph Iconify.design set."></iconify-icon> About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./detailed.html">Detailed Targeting</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./targeting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spending per Targeting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./detailed.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Detailed Targeting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./demographics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Demographics</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content column-page-right" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Detailed Targeting</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-page-right">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">Top Targeted Audiences</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">Top Excluded Audiences</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-3" role="tab" aria-controls="tabset-4-3" aria-selected="false">Top Contested Audiences</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<p>The chart below displays the most utilized targeting criteria by political parties on Meta, based on the amounts spent.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">24 Feb - 25 Mar 2025</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">19 Mar - 25 Mar 2025</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="container">
+<div>
+<div class="row">
+<div style="width: 50%; float: left;">
+<div id="htmlwidget-3b23de75e51dd61395d5" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3b23de75e51dd61395d5">{"x":{"hc_opts":{"chart":{"reflow":true,"height":500},"title":{"text":"Conservative orgs and media","align":"left","style":{"fontWeight":"bold"}},"yAxis":{"title":{"text":"% party budget spent on targeting audience"},"type":"linear","max":11.96477748015111},"credits":{"enabled":false},"exporting":{"enabled":true},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}},"bar":{"horizontal":true,"stacking":"normal"}},"series":[{"group":"group","data":[{"party":"Conservative orgs and media","value":"Golf (sport)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":172999.9059298986,"total_spenderino":2321242,"perc":7.452902624108066,"spend_perlab":"173,000","y":7.452902624108066,"name":"Golf (sport)"},{"party":"Conservative orgs and media","value":"University American football (university sports)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":170603.3553385115,"total_spenderino":2321242,"perc":7.3496583009661,"spend_perlab":"170,603","y":7.3496583009661,"name":"University American football (university sports)"},{"party":"Conservative orgs and media","value":"Tennis (sport)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":168007.0288128263,"total_spenderino":2321242,"perc":7.237807553578055,"spend_perlab":"168,007","y":7.237807553578055,"name":"Tennis (sport)"},{"party":"Conservative orgs and media","value":"Law (law and legal services)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":112546.6398949133,"total_spenderino":2321242,"perc":4.848552623764059,"spend_perlab":"112,547","y":4.848552623764059,"name":"Law (law and legal services)"},{"party":"Conservative orgs and media","value":"Hunting (sport)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":107729.2848431592,"total_spenderino":2321242,"perc":4.641019111456677,"spend_perlab":"107,729","y":4.641019111456677,"name":"Hunting (sport)"},{"party":"Conservative orgs and media","value":"Fishing (outdoors activities)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":107262.4893540133,"total_spenderino":2321242,"perc":4.620909381874587,"spend_perlab":"107,262","y":4.620909381874587,"name":"Fishing (outdoors activities)"},{"party":"Conservative orgs and media","value":"Federal government of the United States","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":106977.9608576006,"total_spenderino":2321242,"perc":4.608651784587757,"spend_perlab":"106,978","y":4.608651784587757,"name":"Federal government of the United States"},{"party":"Conservative orgs and media","value":"Political science","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":105501.3259514709,"total_spenderino":2321242,"perc":4.545037783715395,"spend_perlab":"105,501","y":4.545037783715395,"name":"Political science"},{"party":"Conservative orgs and media","value":"Chick-fil-A (restaurant)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":105148.5197169987,"total_spenderino":2321242,"perc":4.529838755157742,"spend_perlab":"105,149","y":4.529838755157742,"name":"Chick-fil-A (restaurant)"},{"party":"Conservative orgs and media","value":"Deer hunting (hunting)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":101578.8629679703,"total_spenderino":2321242,"perc":4.376056566612626,"spend_perlab":"101,579","y":4.376056566612626,"name":"Deer hunting (hunting)"},{"party":"Conservative orgs and media","value":"Fox hunting","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":101549.8330167255,"total_spenderino":2321242,"perc":4.374805945124443,"spend_perlab":"101,550","y":4.374805945124443,"name":"Fox hunting"},{"party":"Conservative orgs and media","value":"Barstool Sports","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":101282.1246900403,"total_spenderino":2321242,"perc":4.363272967232211,"spend_perlab":"101,282","y":4.363272967232211,"name":"Barstool Sports"},{"party":"Conservative orgs and media","value":"ESPN (television network)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":101282.1246900403,"total_spenderino":2321242,"perc":4.363272967232211,"spend_perlab":"101,282","y":4.363272967232211,"name":"ESPN (television network)"},{"party":"Conservative orgs and media","value":"Lorries (vehicles)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":101268.3836835706,"total_spenderino":2321242,"perc":4.362680999377513,"spend_perlab":"101,268","y":4.362680999377513,"name":"Lorries (vehicles)"},{"party":"Conservative orgs and media","value":"Turkey hunting","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":101206.7935162163,"total_spenderino":2321242,"perc":4.360027671230156,"spend_perlab":"101,207","y":4.360027671230156,"name":"Turkey hunting"},{"party":"Conservative orgs and media","value":"Trophy hunting","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":100702.4739444644,"total_spenderino":2321242,"perc":4.33830138970708,"spend_perlab":"100,702","y":4.33830138970708,"name":"Trophy hunting"},{"party":"Conservative orgs and media","value":"Bass Pro Shops","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":100700.4839533762,"total_spenderino":2321242,"perc":4.338215660124026,"spend_perlab":"100,700","y":4.338215660124026,"name":"Bass Pro Shops"},{"party":"Conservative orgs and media","value":"Big-game hunting","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":100597.6844137413,"total_spenderino":2321242,"perc":4.333787016336139,"spend_perlab":"100,598","y":4.333787016336139,"name":"Big-game hunting"},{"party":"Conservative orgs and media","value":"duck hunting","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":100595.6944226531,"total_spenderino":2321242,"perc":4.333701286753086,"spend_perlab":"100,596","y":4.333701286753086,"name":"duck hunting"},{"party":"Conservative orgs and media","value":"Army Men","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":100544.3946523878,"total_spenderino":2321242,"perc":4.331491272878391,"spend_perlab":"100,544","y":4.331491272878391,"name":"Army Men"}],"type":"bar","color":"#9B151A"}],"xAxis":{"type":"category","title":"","labels":{"style":{"fontSize":"10px"}}},"tooltip":{"pointFormat":"<b>{point.value}<\/b><br>% of total budget spent: {point.y:.1f}%<br>a total of ${point.spend_perlab} on ads including this audience.","headerFormat":""}},"theme":{"colors":["#0266C8","#F90101","#F2B50F","#00933B"],"chart":{"style":{"fontFamily":"Roboto","color":"#444444"}},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#C0C0C0","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Roboto","debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+<div style="width: 50%; float: left;">
+<div id="htmlwidget-2752a990ab6dc4de3e99" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2752a990ab6dc4de3e99">{"x":{"hc_opts":{"chart":{"reflow":true,"height":500},"title":{"text":"Democratic PACs","align":"left","style":{"fontWeight":"bold"}},"yAxis":{"title":{"text":"% party budget spent on targeting audience"},"type":"linear","max":11.96477748015111},"credits":{"enabled":false},"exporting":{"enabled":true},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}},"bar":{"horizontal":true,"stacking":"normal"}},"series":[{"group":"group","data":[{"party":"Democratic PACs","value":"politics and social issues (politics)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":25216.21727918758,"total_spenderino":1514947,"perc":1.664495013963365,"spend_perlab":"25,216","y":1.664495013963365,"name":"politics and social issues (politics)"},{"party":"Democratic PACs","value":"Current events (politics)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":18558.45799755509,"total_spenderino":1514947,"perc":1.22502358152167,"spend_perlab":"18,558","y":1.22502358152167,"name":"Current events (politics)"},{"party":"Democratic PACs","value":"Bubble tea","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":8904.759039182565,"total_spenderino":1514947,"perc":0.587793436944168,"spend_perlab":"8,905","y":0.587793436944168,"name":"Bubble tea"},{"party":"Democratic PACs","value":"Herbal tea","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":8904.759039182565,"total_spenderino":1514947,"perc":0.587793436944168,"spend_perlab":"8,905","y":0.587793436944168,"name":"Herbal tea"},{"party":"Democratic PACs","value":"Matcha","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":8904.759039182565,"total_spenderino":1514947,"perc":0.587793436944168,"spend_perlab":"8,905","y":0.587793436944168,"name":"Matcha"},{"party":"Democratic PACs","value":"Tea (non-alcoholic beverage)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":8904.759039182565,"total_spenderino":1514947,"perc":0.587793436944168,"spend_perlab":"8,905","y":0.587793436944168,"name":"Tea (non-alcoholic beverage)"},{"party":"Democratic PACs","value":"green tea (tea)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":8904.759039182565,"total_spenderino":1514947,"perc":0.587793436944168,"spend_perlab":"8,905","y":0.587793436944168,"name":"green tea (tea)"},{"party":"Democratic PACs","value":"NPR","is_exclusion":"FALSE","detailed_type":"DEMOGRAPHICS","total_spend":4889.309472446969,"total_spenderino":1514947,"perc":0.3227379883551681,"spend_perlab":"4,889","y":0.3227379883551681,"name":"NPR"},{"party":"Democratic PACs","value":"NPR (radio)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":4889.309472446969,"total_spenderino":1514947,"perc":0.3227379883551681,"spend_perlab":"4,889","y":0.3227379883551681,"name":"NPR (radio)"},{"party":"Democratic PACs","value":"NPR All Things Considered","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":4889.309472446969,"total_spenderino":1514947,"perc":0.3227379883551681,"spend_perlab":"4,889","y":0.3227379883551681,"name":"NPR All Things Considered"},{"party":"Democratic PACs","value":"NPR Books","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":4889.309472446969,"total_spenderino":1514947,"perc":0.3227379883551681,"spend_perlab":"4,889","y":0.3227379883551681,"name":"NPR Books"},{"party":"Democratic PACs","value":"NPR Morning Edition","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":4889.309472446969,"total_spenderino":1514947,"perc":0.3227379883551681,"spend_perlab":"4,889","y":0.3227379883551681,"name":"NPR Morning Edition"},{"party":"Democratic PACs","value":"NPR's Weekend Edition","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":4889.309472446969,"total_spenderino":1514947,"perc":0.3227379883551681,"spend_perlab":"4,889","y":0.3227379883551681,"name":"NPR's Weekend Edition"},{"party":"Democratic PACs","value":"npr music","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":4889.309472446969,"total_spenderino":1514947,"perc":0.3227379883551681,"spend_perlab":"4,889","y":0.3227379883551681,"name":"npr music"},{"party":"Democratic PACs","value":"Household income: top 10% of ZIP codes (US)","is_exclusion":"FALSE","detailed_type":"DEMOGRAPHICS","total_spend":4692.039493732084,"total_spenderino":1514947,"perc":0.3097164121076239,"spend_perlab":"4,692","y":0.3097164121076239,"name":"Household income: top 10% of ZIP codes (US)"},{"party":"Democratic PACs","value":"Nordstrom (retailer)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":1782.379807682454,"total_spenderino":1514947,"perc":0.1176529481019768,"spend_perlab":"1,782","y":0.1176529481019768,"name":"Nordstrom (retailer)"}],"type":"bar","color":"#2c4282"}],"xAxis":{"type":"category","title":"","labels":{"style":{"fontSize":"10px"}}},"tooltip":{"pointFormat":"<b>{point.value}<\/b><br>% of total budget spent: {point.y:.1f}%<br>a total of ${point.spend_perlab} on ads including this audience.","headerFormat":""}},"theme":{"colors":["#0266C8","#F90101","#F2B50F","#00933B"],"chart":{"style":{"fontFamily":"Roboto","color":"#444444"}},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#C0C0C0","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Roboto","debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="row">
+<div style="width: 50%; float: left;">
+<div id="htmlwidget-700c9a2178112cf820e7" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-700c9a2178112cf820e7">{"x":{"hc_opts":{"chart":{"reflow":true,"height":500},"title":{"text":"Democrats","align":"left","style":{"fontWeight":"bold"}},"yAxis":{"title":{"text":"% party budget spent on targeting audience"},"type":"linear","max":11.96477748015111},"credits":{"enabled":false},"exporting":{"enabled":true},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}},"bar":{"horizontal":true,"stacking":"normal"}},"series":[{"group":"group","data":[{"party":"Democrats","value":"NPR (radio)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":145842.147816575,"total_spenderino":8291374,"perc":1.75896236035879,"spend_perlab":"145,842","y":1.75896236035879,"name":"NPR (radio)"},{"party":"Democrats","value":"Gender studies","is_exclusion":"FALSE","detailed_type":"DEMOGRAPHICS","total_spend":144778.9009119295,"total_spenderino":8291374,"perc":1.746138829486277,"spend_perlab":"144,779","y":1.746138829486277,"name":"Gender studies"},{"party":"Democrats","value":"Women's studies","is_exclusion":"FALSE","detailed_type":"DEMOGRAPHICS","total_spend":144778.9009119295,"total_spenderino":8291374,"perc":1.746138829486277,"spend_perlab":"144,779","y":1.746138829486277,"name":"Women's studies"},{"party":"Democrats","value":"Ethical consumerism (retail)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":144778.9009119295,"total_spenderino":8291374,"perc":1.746138829486277,"spend_perlab":"144,779","y":1.746138829486277,"name":"Ethical consumerism (retail)"},{"party":"Democrats","value":"Feminist philosophy","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":144778.9009119295,"total_spenderino":8291374,"perc":1.746138829486277,"spend_perlab":"144,779","y":1.746138829486277,"name":"Feminist philosophy"},{"party":"Democrats","value":"Organic food (food and drink)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":144778.9009119295,"total_spenderino":8291374,"perc":1.746138829486277,"spend_perlab":"144,779","y":1.746138829486277,"name":"Organic food (food and drink)"},{"party":"Democrats","value":"Public broadcasting","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":144778.9009119295,"total_spenderino":8291374,"perc":1.746138829486277,"spend_perlab":"144,779","y":1.746138829486277,"name":"Public broadcasting"},{"party":"Democrats","value":"Sustainable energy (energy and utilities)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":144778.9009119295,"total_spenderino":8291374,"perc":1.746138829486277,"spend_perlab":"144,779","y":1.746138829486277,"name":"Sustainable energy (energy and utilities)"},{"party":"Democrats","value":"Women in STEM fields","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":144778.9009119295,"total_spenderino":8291374,"perc":1.746138829486277,"spend_perlab":"144,779","y":1.746138829486277,"name":"Women in STEM fields"},{"party":"Democrats","value":"Women in science","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":144778.9009119295,"total_spenderino":8291374,"perc":1.746138829486277,"spend_perlab":"144,779","y":1.746138829486277,"name":"Women in science"},{"party":"Democrats","value":"sustainable fashion (fashion and shopping)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":144778.9009119295,"total_spenderino":8291374,"perc":1.746138829486277,"spend_perlab":"144,779","y":1.746138829486277,"name":"sustainable fashion (fashion and shopping)"},{"party":"Democrats","value":"Cosmopolitan (magazine)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":14360.47319925019,"total_spenderino":8291374,"perc":0.1731977498452029,"spend_perlab":"14,360","y":0.1731977498452029,"name":"Cosmopolitan (magazine)"},{"party":"Democrats","value":"Harper's Bazaar","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":12852.91758808874,"total_spenderino":8291374,"perc":0.1550155328669137,"spend_perlab":"12,853","y":0.1550155328669137,"name":"Harper's Bazaar"},{"party":"Democrats","value":"PopSugar","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":12852.91758808874,"total_spenderino":8291374,"perc":0.1550155328669137,"spend_perlab":"12,853","y":0.1550155328669137,"name":"PopSugar"},{"party":"Democrats","value":"Refinery29 Beauty","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":12852.91758808874,"total_spenderino":8291374,"perc":0.1550155328669137,"spend_perlab":"12,853","y":0.1550155328669137,"name":"Refinery29 Beauty"},{"party":"Democrats","value":"activism (social causes)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":12427.02685448086,"total_spenderino":8291374,"perc":0.1498789809081205,"spend_perlab":"12,427","y":0.1498789809081205,"name":"activism (social causes)"},{"party":"Democrats","value":"Cannes Film Festival","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":11583.67627727349,"total_spenderino":8291374,"perc":0.1397075596550522,"spend_perlab":"11,584","y":0.1397075596550522,"name":"Cannes Film Festival"},{"party":"Democrats","value":"Independent film","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":11583.67627727349,"total_spenderino":8291374,"perc":0.1397075596550522,"spend_perlab":"11,584","y":0.1397075596550522,"name":"Independent film"},{"party":"Democrats","value":"Sundance Film Festival","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":11583.67627727349,"total_spenderino":8291374,"perc":0.1397075596550522,"spend_perlab":"11,584","y":0.1397075596550522,"name":"Sundance Film Festival"},{"party":"Democrats","value":"Toronto International Film Festival","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":11583.67627727349,"total_spenderino":8291374,"perc":0.1397075596550522,"spend_perlab":"11,584","y":0.1397075596550522,"name":"Toronto International Film Festival"}],"type":"bar","color":"#2d54c2"}],"xAxis":{"type":"category","title":"","labels":{"style":{"fontSize":"10px"}}},"tooltip":{"pointFormat":"<b>{point.value}<\/b><br>% of total budget spent: {point.y:.1f}%<br>a total of ${point.spend_perlab} on ads including this audience.","headerFormat":""}},"theme":{"colors":["#0266C8","#F90101","#F2B50F","#00933B"],"chart":{"style":{"fontFamily":"Roboto","color":"#444444"}},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#C0C0C0","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Roboto","debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+<div style="width: 50%; float: left;">
+<div id="htmlwidget-de6ad3f8fb029a0c3f56" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-de6ad3f8fb029a0c3f56">{"x":{"hc_opts":{"chart":{"reflow":true,"height":500},"title":{"text":"Harris + PACs","align":"left","style":{"fontWeight":"bold"}},"yAxis":{"title":{"text":"% party budget spent on targeting audience"},"type":"linear","max":11.96477748015111},"credits":{"enabled":false},"exporting":{"enabled":true},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}},"bar":{"horizontal":true,"stacking":"normal"}},"series":[{"group":"group","data":[{"party":"Harris + PACs","value":"Breaking news (news service)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":1599.613674776911,"total_spenderino":95765,"perc":1.670353129825,"spend_perlab":"1,600","y":1.670353129825,"name":"Breaking news (news service)"},{"party":"Harris + PACs","value":"News media (news service)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":1599.613674776911,"total_spenderino":95765,"perc":1.670353129825,"spend_perlab":"1,600","y":1.670353129825,"name":"News media (news service)"},{"party":"Harris + PACs","value":"news magazine (magazines)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":1599.613674776911,"total_spenderino":95765,"perc":1.670353129825,"spend_perlab":"1,600","y":1.670353129825,"name":"news magazine (magazines)"},{"party":"Harris + PACs","value":"Current events (politics)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":44.26010167829949,"total_spenderino":95765,"perc":0.04621740894721401,"spend_perlab":"44","y":0.04621740894721401,"name":"Current events (politics)"},{"party":"Harris + PACs","value":"Journalism (news service)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":44.26010167829949,"total_spenderino":95765,"perc":0.04621740894721401,"spend_perlab":"44","y":0.04621740894721401,"name":"Journalism (news service)"},{"party":"Harris + PACs","value":"Local news (news service)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":44.26010167829949,"total_spenderino":95765,"perc":0.04621740894721401,"spend_perlab":"44","y":0.04621740894721401,"name":"Local news (news service)"},{"party":"Harris + PACs","value":"News broadcasting (news service)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":44.26010167829949,"total_spenderino":95765,"perc":0.04621740894721401,"spend_perlab":"44","y":0.04621740894721401,"name":"News broadcasting (news service)"},{"party":"Harris + PACs","value":"Newspapers (publications)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":44.26010167829949,"total_spenderino":95765,"perc":0.04621740894721401,"spend_perlab":"44","y":0.04621740894721401,"name":"Newspapers (publications)"}],"type":"bar","color":"#164fd7"}],"xAxis":{"type":"category","title":"","labels":{"style":{"fontSize":"10px"}}},"tooltip":{"pointFormat":"<b>{point.value}<\/b><br>% of total budget spent: {point.y:.1f}%<br>a total of ${point.spend_perlab} on ads including this audience.","headerFormat":""}},"theme":{"colors":["#0266C8","#F90101","#F2B50F","#00933B"],"chart":{"style":{"fontFamily":"Roboto","color":"#444444"}},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#C0C0C0","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Roboto","debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="row">
+<div style="width: 50%; float: left;">
+<div id="htmlwidget-a151f47ffbe13f9848c7" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a151f47ffbe13f9848c7">{"x":{"hc_opts":{"chart":{"reflow":true,"height":500},"title":{"text":"Others","align":"left","style":{"fontWeight":"bold"}},"yAxis":{"title":{"text":"% party budget spent on targeting audience"},"type":"linear","max":11.96477748015111},"credits":{"enabled":false},"exporting":{"enabled":true},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}},"bar":{"horizontal":true,"stacking":"normal"}},"series":[{"group":"group","data":[{"party":"Others","value":"Natural environment (science)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":58319.73042387194,"total_spenderino":1525329,"perc":3.823419762154391,"spend_perlab":"58,320","y":3.823419762154391,"name":"Natural environment (science)"},{"party":"Others","value":"ecology (science)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":57809.37032115115,"total_spenderino":1525329,"perc":3.789960744282128,"spend_perlab":"57,809","y":3.789960744282128,"name":"ecology (science)"},{"party":"Others","value":"Sustainable energy (energy and utilities)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":52247.70874722474,"total_spenderino":1525329,"perc":3.425340287061005,"spend_perlab":"52,248","y":3.425340287061005,"name":"Sustainable energy (energy and utilities)"},{"party":"Others","value":"Renewable energy (energy and utilities)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":51737.34864450396,"total_spenderino":1525329,"perc":3.391881269188743,"spend_perlab":"51,737","y":3.391881269188743,"name":"Renewable energy (energy and utilities)"},{"party":"Others","value":"Nature (science)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":51640.9043378155,"total_spenderino":1525329,"perc":3.385558416434454,"spend_perlab":"51,641","y":3.385558416434454,"name":"Nature (science)"},{"party":"Others","value":"Solar energy (energy and utilities)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":50471.86838979774,"total_spenderino":1525329,"perc":3.308916855956829,"spend_perlab":"50,472","y":3.308916855956829,"name":"Solar energy (energy and utilities)"},{"party":"Others","value":"Environmental science (science)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":49238.79047910715,"total_spenderino":1525329,"perc":3.228076728306296,"spend_perlab":"49,239","y":3.228076728306296,"name":"Environmental science (science)"},{"party":"Others","value":"Solar power (energy and utilities)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":48322.92366999894,"total_spenderino":1525329,"perc":3.16803284209498,"spend_perlab":"48,323","y":3.16803284209498,"name":"Solar power (energy and utilities)"},{"party":"Others","value":"Efficient energy use (energy and utilities)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":47896.61020896418,"total_spenderino":1525329,"perc":3.140083890686153,"spend_perlab":"47,897","y":3.140083890686153,"name":"Efficient energy use (energy and utilities)"},{"party":"Others","value":"Solar panel (energy and utilities)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":45741.60800057305,"total_spenderino":1525329,"perc":2.998802750132795,"spend_perlab":"45,742","y":2.998802750132795,"name":"Solar panel (energy and utilities)"},{"party":"Others","value":"Sustainable agriculture (agriculture)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":39440.27662396576,"total_spenderino":1525329,"perc":2.585689816686483,"spend_perlab":"39,440","y":2.585689816686483,"name":"Sustainable agriculture (agriculture)"},{"party":"Others","value":"national park (tourist destinations)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":36503.69665152176,"total_spenderino":1525329,"perc":2.39316872960009,"spend_perlab":"36,504","y":2.39316872960009,"name":"national park (tourist destinations)"},{"party":"Others","value":"Camping (outdoors activities)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":36221.30932433292,"total_spenderino":1525329,"perc":2.374655521814174,"spend_perlab":"36,221","y":2.374655521814174,"name":"Camping (outdoors activities)"},{"party":"Others","value":"Earth Day","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":31730.08842037571,"total_spenderino":1525329,"perc":2.080212755436742,"spend_perlab":"31,730","y":2.080212755436742,"name":"Earth Day"},{"party":"Others","value":"backpacking  (travel)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":31730.08842037571,"total_spenderino":1525329,"perc":2.080212755436742,"spend_perlab":"31,730","y":2.080212755436742,"name":"backpacking  (travel)"},{"party":"Others","value":"hiking trails (hiking)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":31730.08842037571,"total_spenderino":1525329,"perc":2.080212755436742,"spend_perlab":"31,730","y":2.080212755436742,"name":"hiking trails (hiking)"},{"party":"Others","value":"Current events (politics)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":30669.92496706474,"total_spenderino":1525329,"perc":2.010708835081792,"spend_perlab":"30,670","y":2.010708835081792,"name":"Current events (politics)"},{"party":"Others","value":"Local news (news service)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":30669.92496706474,"total_spenderino":1525329,"perc":2.010708835081792,"spend_perlab":"30,670","y":2.010708835081792,"name":"Local news (news service)"},{"party":"Others","value":"Sustainability","is_exclusion":"FALSE","detailed_type":"DEMOGRAPHICS","total_spend":29980.17482823729,"total_spenderino":1525329,"perc":1.965489073389235,"spend_perlab":"29,980","y":1.965489073389235,"name":"Sustainability"},{"party":"Others","value":"Climate (weather)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":29469.81472551606,"total_spenderino":1525329,"perc":1.932030055516945,"spend_perlab":"29,470","y":1.932030055516945,"name":"Climate (weather)"}],"type":"bar","color":"#cccccc"}],"xAxis":{"type":"category","title":"","labels":{"style":{"fontSize":"10px"}}},"tooltip":{"pointFormat":"<b>{point.value}<\/b><br>% of total budget spent: {point.y:.1f}%<br>a total of ${point.spend_perlab} on ads including this audience.","headerFormat":""}},"theme":{"colors":["#0266C8","#F90101","#F2B50F","#00933B"],"chart":{"style":{"fontFamily":"Roboto","color":"#444444"}},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#C0C0C0","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Roboto","debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+<div style="width: 50%; float: left;">
+<div id="htmlwidget-9fd43a00dc51f5f03218" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9fd43a00dc51f5f03218">{"x":{"hc_opts":{"chart":{"reflow":true,"height":500},"title":{"text":"Progressive orgs and media","align":"left","style":{"fontWeight":"bold"}},"yAxis":{"title":{"text":"% party budget spent on targeting audience"},"type":"linear","max":11.96477748015111},"credits":{"enabled":false},"exporting":{"enabled":true},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}},"bar":{"horizontal":true,"stacking":"normal"}},"series":[{"group":"group","data":[{"party":"Progressive orgs and media","value":"Spotify (streaming service)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":282581.9608662624,"total_spenderino":2361782,"perc":11.96477748015111,"spend_perlab":"282,582","y":11.96477748015111,"name":"Spotify (streaming service)"},{"party":"Progressive orgs and media","value":"Travel (travel and tourism)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":268152.4392837438,"total_spenderino":2361782,"perc":11.3538183999939,"spend_perlab":"268,152","y":11.3538183999939,"name":"Travel (travel and tourism)"},{"party":"Progressive orgs and media","value":"Football fans (moderate content engagement)","is_exclusion":"FALSE","detailed_type":"BEHAVIORS","total_spend":267350.6203071656,"total_spenderino":2361782,"perc":11.31986865456531,"spend_perlab":"267,351","y":11.31986865456531,"name":"Football fans (moderate content engagement)"},{"party":"Progressive orgs and media","value":"Apple Music","is_exclusion":"FALSE","detailed_type":"DEMOGRAPHICS","total_spend":267350.6203071656,"total_spenderino":2361782,"perc":11.31986865456531,"spend_perlab":"267,351","y":11.31986865456531,"name":"Apple Music"},{"party":"Progressive orgs and media","value":"Hip hop","is_exclusion":"FALSE","detailed_type":"DEMOGRAPHICS","total_spend":267350.6203071656,"total_spenderino":2361782,"perc":11.31986865456531,"spend_perlab":"267,351","y":11.31986865456531,"name":"Hip hop"},{"party":"Progressive orgs and media","value":"Performing arts","is_exclusion":"FALSE","detailed_type":"DEMOGRAPHICS","total_spend":267350.6203071656,"total_spenderino":2361782,"perc":11.31986865456531,"spend_perlab":"267,351","y":11.31986865456531,"name":"Performing arts"},{"party":"Progressive orgs and media","value":"Ballet (dance)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"total_spenderino":2361782,"perc":11.31986865456531,"spend_perlab":"267,351","y":11.31986865456531,"name":"Ballet (dance)"},{"party":"Progressive orgs and media","value":"Baseball (sport)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"total_spenderino":2361782,"perc":11.31986865456531,"spend_perlab":"267,351","y":11.31986865456531,"name":"Baseball (sport)"},{"party":"Progressive orgs and media","value":"Basketball (sport)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"total_spenderino":2361782,"perc":11.31986865456531,"spend_perlab":"267,351","y":11.31986865456531,"name":"Basketball (sport)"},{"party":"Progressive orgs and media","value":"Culture (social concept)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"total_spenderino":2361782,"perc":11.31986865456531,"spend_perlab":"267,351","y":11.31986865456531,"name":"Culture (social concept)"},{"party":"Progressive orgs and media","value":"Dance (art)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"total_spenderino":2361782,"perc":11.31986865456531,"spend_perlab":"267,351","y":11.31986865456531,"name":"Dance (art)"},{"party":"Progressive orgs and media","value":"Festival (event)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"total_spenderino":2361782,"perc":11.31986865456531,"spend_perlab":"267,351","y":11.31986865456531,"name":"Festival (event)"},{"party":"Progressive orgs and media","value":"Football (sports)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"total_spenderino":2361782,"perc":11.31986865456531,"spend_perlab":"267,351","y":11.31986865456531,"name":"Football (sports)"},{"party":"Progressive orgs and media","value":"Gaming (video games)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"total_spenderino":2361782,"perc":11.31986865456531,"spend_perlab":"267,351","y":11.31986865456531,"name":"Gaming (video games)"},{"party":"Progressive orgs and media","value":"Hockey (sports)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"total_spenderino":2361782,"perc":11.31986865456531,"spend_perlab":"267,351","y":11.31986865456531,"name":"Hockey (sports)"},{"party":"Progressive orgs and media","value":"Journalism (news service)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"total_spenderino":2361782,"perc":11.31986865456531,"spend_perlab":"267,351","y":11.31986865456531,"name":"Journalism (news service)"},{"party":"Progressive orgs and media","value":"Music (entertainment and media)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"total_spenderino":2361782,"perc":11.31986865456531,"spend_perlab":"267,351","y":11.31986865456531,"name":"Music (entertainment and media)"},{"party":"Progressive orgs and media","value":"Music festivals (events)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"total_spenderino":2361782,"perc":11.31986865456531,"spend_perlab":"267,351","y":11.31986865456531,"name":"Music festivals (events)"},{"party":"Progressive orgs and media","value":"NASCAR (motor sports)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"total_spenderino":2361782,"perc":11.31986865456531,"spend_perlab":"267,351","y":11.31986865456531,"name":"NASCAR (motor sports)"},{"party":"Progressive orgs and media","value":"NBA All-Star Game","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"total_spenderino":2361782,"perc":11.31986865456531,"spend_perlab":"267,351","y":11.31986865456531,"name":"NBA All-Star Game"}],"type":"bar","color":"#8BC7FC"}],"xAxis":{"type":"category","title":"","labels":{"style":{"fontSize":"10px"}}},"tooltip":{"pointFormat":"<b>{point.value}<\/b><br>% of total budget spent: {point.y:.1f}%<br>a total of ${point.spend_perlab} on ads including this audience.","headerFormat":""}},"theme":{"colors":["#0266C8","#F90101","#F2B50F","#00933B"],"chart":{"style":{"fontFamily":"Roboto","color":"#444444"}},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#C0C0C0","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Roboto","debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="container">
+<div>
+<div class="row">
+<div style="width: 50%; float: left;">
+<div id="htmlwidget-318b4c3b5a59458c5066" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-318b4c3b5a59458c5066">{"x":{"hc_opts":{"chart":{"reflow":true,"height":500},"title":{"text":"Conservative orgs and media","align":"left","style":{"fontWeight":"bold"}},"yAxis":{"title":{"text":"% party budget spent on targeting audience"},"type":"linear","max":11.73736939595421},"credits":{"enabled":false},"exporting":{"enabled":true},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}},"bar":{"horizontal":true,"stacking":"normal"}},"series":[{"group":"group","data":[{"party":"Conservative orgs and media","value":"Golf (sport)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":50588.02850249399,"total_spenderino":569145,"perc":8.888425357772448,"spend_perlab":"50,588","y":8.888425357772448,"name":"Golf (sport)"},{"party":"Conservative orgs and media","value":"Tennis (sport)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":48531.88334118164,"total_spenderino":569145,"perc":8.527156232802122,"spend_perlab":"48,532","y":8.527156232802122,"name":"Tennis (sport)"},{"party":"Conservative orgs and media","value":"University American football (university sports)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":48020.41008039018,"total_spenderino":569145,"perc":8.437289281358911,"spend_perlab":"48,020","y":8.437289281358911,"name":"University American football (university sports)"},{"party":"Conservative orgs and media","value":"Federal government of the United States","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":33298.77146984146,"total_spenderino":569145,"perc":5.850665730146353,"spend_perlab":"33,299","y":5.850665730146353,"name":"Federal government of the United States"},{"party":"Conservative orgs and media","value":"Law (law and legal services)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":32923.12938548941,"total_spenderino":569145,"perc":5.784664608401973,"spend_perlab":"32,923","y":5.784664608401973,"name":"Law (law and legal services)"},{"party":"Conservative orgs and media","value":"Government (government agency)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":32773.75476415709,"total_spenderino":569145,"perc":5.758419166320901,"spend_perlab":"32,774","y":5.758419166320901,"name":"Government (government agency)"},{"party":"Conservative orgs and media","value":"Political science","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":29941.87521657122,"total_spenderino":569145,"perc":5.26085184207385,"spend_perlab":"29,942","y":5.26085184207385,"name":"Political science"},{"party":"Conservative orgs and media","value":"Fishing (outdoors activities)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":27630.69175631379,"total_spenderino":569145,"perc":4.854771939719015,"spend_perlab":"27,631","y":4.854771939719015,"name":"Fishing (outdoors activities)"},{"party":"Conservative orgs and media","value":"Hunting (sport)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":27539.88206196143,"total_spenderino":569145,"perc":4.838816481206271,"spend_perlab":"27,540","y":4.838816481206271,"name":"Hunting (sport)"},{"party":"Conservative orgs and media","value":"United States Constitution","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":26795.74571918845,"total_spenderino":569145,"perc":4.708070126099404,"spend_perlab":"26,796","y":4.708070126099404,"name":"United States Constitution"},{"party":"Conservative orgs and media","value":"Administrative law","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":26662.64574045138,"total_spenderino":569145,"perc":4.684684173708172,"spend_perlab":"26,663","y":4.684684173708172,"name":"Administrative law"},{"party":"Conservative orgs and media","value":"Constitution","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":26662.64574045138,"total_spenderino":569145,"perc":4.684684173708172,"spend_perlab":"26,663","y":4.684684173708172,"name":"Constitution"},{"party":"Conservative orgs and media","value":"Constitutional law","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":26662.64574045138,"total_spenderino":569145,"perc":4.684684173708172,"spend_perlab":"26,663","y":4.684684173708172,"name":"Constitutional law"},{"party":"Conservative orgs and media","value":"Court","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":26662.64574045138,"total_spenderino":569145,"perc":4.684684173708172,"spend_perlab":"26,663","y":4.684684173708172,"name":"Court"},{"party":"Conservative orgs and media","value":"Judge","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":26662.64574045138,"total_spenderino":569145,"perc":4.684684173708172,"spend_perlab":"26,663","y":4.684684173708172,"name":"Judge"},{"party":"Conservative orgs and media","value":"Judiciary","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":26662.64574045138,"total_spenderino":569145,"perc":4.684684173708172,"spend_perlab":"26,663","y":4.684684173708172,"name":"Judiciary"},{"party":"Conservative orgs and media","value":"Lawyer (law and legal services)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":26662.64574045138,"total_spenderino":569145,"perc":4.684684173708172,"spend_perlab":"26,663","y":4.684684173708172,"name":"Lawyer (law and legal services)"},{"party":"Conservative orgs and media","value":"Fox hunting","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":26637.63474690788,"total_spenderino":569145,"perc":4.680289688376052,"spend_perlab":"26,638","y":4.680289688376052,"name":"Fox hunting"},{"party":"Conservative orgs and media","value":"Deer hunting (hunting)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":26621.62464470722,"total_spenderino":569145,"perc":4.677476679002226,"spend_perlab":"26,622","y":4.677476679002226,"name":"Deer hunting (hunting)"},{"party":"Conservative orgs and media","value":"Turkey hunting","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":26291.72298494155,"total_spenderino":569145,"perc":4.619512248186586,"spend_perlab":"26,292","y":4.619512248186586,"name":"Turkey hunting"}],"type":"bar","color":"#9B151A"}],"xAxis":{"type":"category","title":"","labels":{"style":{"fontSize":"10px"}}},"tooltip":{"pointFormat":"<b>{point.value}<\/b><br>% of total budget spent: {point.y:.1f}%<br>a total of ${point.spend_perlab} on ads including this audience.","headerFormat":""}},"theme":{"colors":["#0266C8","#F90101","#F2B50F","#00933B"],"chart":{"style":{"fontFamily":"Roboto","color":"#444444"}},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#C0C0C0","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Roboto","debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+<div style="width: 50%; float: left;">
+<div id="htmlwidget-b3fec2e117f027570547" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b3fec2e117f027570547">{"x":{"hc_opts":{"chart":{"reflow":true,"height":500},"title":{"text":"Democratic PACs","align":"left","style":{"fontWeight":"bold"}},"yAxis":{"title":{"text":"% party budget spent on targeting audience"},"type":"linear","max":11.73736939595421},"credits":{"enabled":false},"exporting":{"enabled":true},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}},"bar":{"horizontal":true,"stacking":"normal"}},"series":[{"group":"group","data":[{"party":"Democratic PACs","value":"Current events (politics)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":1908.377951669154,"total_spenderino":127893,"perc":1.492167633622758,"spend_perlab":"1,908","y":1.492167633622758,"name":"Current events (politics)"},{"party":"Democratic PACs","value":"politics and social issues (politics)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":1787.429982807946,"total_spenderino":127893,"perc":1.397597978628968,"spend_perlab":"1,787","y":1.397597978628968,"name":"politics and social issues (politics)"},{"party":"Democratic PACs","value":"NPR","is_exclusion":"FALSE","detailed_type":"DEMOGRAPHICS","total_spend":599.9899240737053,"total_spenderino":127893,"perc":0.4691342951324195,"spend_perlab":"600","y":0.4691342951324195,"name":"NPR"},{"party":"Democratic PACs","value":"NPR (radio)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":599.9899240737053,"total_spenderino":127893,"perc":0.4691342951324195,"spend_perlab":"600","y":0.4691342951324195,"name":"NPR (radio)"},{"party":"Democratic PACs","value":"NPR All Things Considered","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":599.9899240737053,"total_spenderino":127893,"perc":0.4691342951324195,"spend_perlab":"600","y":0.4691342951324195,"name":"NPR All Things Considered"},{"party":"Democratic PACs","value":"NPR Books","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":599.9899240737053,"total_spenderino":127893,"perc":0.4691342951324195,"spend_perlab":"600","y":0.4691342951324195,"name":"NPR Books"},{"party":"Democratic PACs","value":"NPR Morning Edition","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":599.9899240737053,"total_spenderino":127893,"perc":0.4691342951324195,"spend_perlab":"600","y":0.4691342951324195,"name":"NPR Morning Edition"},{"party":"Democratic PACs","value":"NPR's Weekend Edition","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":599.9899240737053,"total_spenderino":127893,"perc":0.4691342951324195,"spend_perlab":"600","y":0.4691342951324195,"name":"NPR's Weekend Edition"},{"party":"Democratic PACs","value":"npr music","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":599.9899240737053,"total_spenderino":127893,"perc":0.4691342951324195,"spend_perlab":"600","y":0.4691342951324195,"name":"npr music"},{"party":"Democratic PACs","value":"Bubble tea","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":301.314939869813,"total_spenderino":127893,"perc":0.2355992430154997,"spend_perlab":"301","y":0.2355992430154997,"name":"Bubble tea"},{"party":"Democratic PACs","value":"Herbal tea","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":301.314939869813,"total_spenderino":127893,"perc":0.2355992430154997,"spend_perlab":"301","y":0.2355992430154997,"name":"Herbal tea"},{"party":"Democratic PACs","value":"Matcha","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":301.314939869813,"total_spenderino":127893,"perc":0.2355992430154997,"spend_perlab":"301","y":0.2355992430154997,"name":"Matcha"},{"party":"Democratic PACs","value":"Tea (non-alcoholic beverage)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":301.314939869813,"total_spenderino":127893,"perc":0.2355992430154997,"spend_perlab":"301","y":0.2355992430154997,"name":"Tea (non-alcoholic beverage)"},{"party":"Democratic PACs","value":"green tea (tea)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":301.314939869813,"total_spenderino":127893,"perc":0.2355992430154997,"spend_perlab":"301","y":0.2355992430154997,"name":"green tea (tea)"},{"party":"Democratic PACs","value":"Household income: top 10% of ZIP codes (US)","is_exclusion":"FALSE","detailed_type":"DEMOGRAPHICS","total_spend":237.5860101011181,"total_spenderino":127893,"perc":0.1857693619675182,"spend_perlab":"238","y":0.1857693619675182,"name":"Household income: top 10% of ZIP codes (US)"},{"party":"Democratic PACs","value":"Nordstrom (retailer)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":41.0593104707768,"total_spenderino":127893,"perc":0.03210442359689491,"spend_perlab":"41","y":0.03210442359689491,"name":"Nordstrom (retailer)"}],"type":"bar","color":"#2c4282"}],"xAxis":{"type":"category","title":"","labels":{"style":{"fontSize":"10px"}}},"tooltip":{"pointFormat":"<b>{point.value}<\/b><br>% of total budget spent: {point.y:.1f}%<br>a total of ${point.spend_perlab} on ads including this audience.","headerFormat":""}},"theme":{"colors":["#0266C8","#F90101","#F2B50F","#00933B"],"chart":{"style":{"fontFamily":"Roboto","color":"#444444"}},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#C0C0C0","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Roboto","debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="row">
+<div style="width: 50%; float: left;">
+<div id="htmlwidget-b6b182446954cd129788" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b6b182446954cd129788">{"x":{"hc_opts":{"chart":{"reflow":true,"height":500},"title":{"text":"Democrats","align":"left","style":{"fontWeight":"bold"}},"yAxis":{"title":{"text":"% party budget spent on targeting audience"},"type":"linear","max":11.73736939595421},"credits":{"enabled":false},"exporting":{"enabled":true},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}},"bar":{"horizontal":true,"stacking":"normal"}},"series":[{"group":"group","data":[{"party":"Democrats","value":"Gender studies","is_exclusion":"FALSE","detailed_type":"DEMOGRAPHICS","total_spend":32421.67304861812,"total_spenderino":545439,"perc":5.944142800316464,"spend_perlab":"32,422","y":5.944142800316464,"name":"Gender studies"},{"party":"Democrats","value":"Women's studies","is_exclusion":"FALSE","detailed_type":"DEMOGRAPHICS","total_spend":32421.67304861812,"total_spenderino":545439,"perc":5.944142800316464,"spend_perlab":"32,422","y":5.944142800316464,"name":"Women's studies"},{"party":"Democrats","value":"Ethical consumerism (retail)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":32421.67304861812,"total_spenderino":545439,"perc":5.944142800316464,"spend_perlab":"32,422","y":5.944142800316464,"name":"Ethical consumerism (retail)"},{"party":"Democrats","value":"Feminist philosophy","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":32421.67304861812,"total_spenderino":545439,"perc":5.944142800316464,"spend_perlab":"32,422","y":5.944142800316464,"name":"Feminist philosophy"},{"party":"Democrats","value":"NPR (radio)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":32421.67304861812,"total_spenderino":545439,"perc":5.944142800316464,"spend_perlab":"32,422","y":5.944142800316464,"name":"NPR (radio)"},{"party":"Democrats","value":"Organic food (food and drink)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":32421.67304861812,"total_spenderino":545439,"perc":5.944142800316464,"spend_perlab":"32,422","y":5.944142800316464,"name":"Organic food (food and drink)"},{"party":"Democrats","value":"Public broadcasting","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":32421.67304861812,"total_spenderino":545439,"perc":5.944142800316464,"spend_perlab":"32,422","y":5.944142800316464,"name":"Public broadcasting"},{"party":"Democrats","value":"Sustainable energy (energy and utilities)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":32421.67304861812,"total_spenderino":545439,"perc":5.944142800316464,"spend_perlab":"32,422","y":5.944142800316464,"name":"Sustainable energy (energy and utilities)"},{"party":"Democrats","value":"Women in STEM fields","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":32421.67304861812,"total_spenderino":545439,"perc":5.944142800316464,"spend_perlab":"32,422","y":5.944142800316464,"name":"Women in STEM fields"},{"party":"Democrats","value":"Women in science","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":32421.67304861812,"total_spenderino":545439,"perc":5.944142800316464,"spend_perlab":"32,422","y":5.944142800316464,"name":"Women in science"},{"party":"Democrats","value":"sustainable fashion (fashion and shopping)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":32421.67304861812,"total_spenderino":545439,"perc":5.944142800316464,"spend_perlab":"32,422","y":5.944142800316464,"name":"sustainable fashion (fashion and shopping)"}],"type":"bar","color":"#2d54c2"}],"xAxis":{"type":"category","title":"","labels":{"style":{"fontSize":"10px"}}},"tooltip":{"pointFormat":"<b>{point.value}<\/b><br>% of total budget spent: {point.y:.1f}%<br>a total of ${point.spend_perlab} on ads including this audience.","headerFormat":""}},"theme":{"colors":["#0266C8","#F90101","#F2B50F","#00933B"],"chart":{"style":{"fontFamily":"Roboto","color":"#444444"}},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#C0C0C0","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Roboto","debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+<div style="width: 50%; float: left;">
+<div id="htmlwidget-361304e57b996a6125ea" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-361304e57b996a6125ea">{"x":{"hc_opts":{"chart":{"reflow":true,"height":500},"title":{"text":"Others","align":"left","style":{"fontWeight":"bold"}},"yAxis":{"title":{"text":"% party budget spent on targeting audience"},"type":"linear","max":11.73736939595421},"credits":{"enabled":false},"exporting":{"enabled":true},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}},"bar":{"horizontal":true,"stacking":"normal"}},"series":[{"group":"group","data":[{"party":"Others","value":"Natural environment (science)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":13385.51579966201,"total_spenderino":442707,"perc":3.023560910412985,"spend_perlab":"13,386","y":3.023560910412985,"name":"Natural environment (science)"},{"party":"Others","value":"ecology (science)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":13134.15555540148,"total_spenderino":442707,"perc":2.966782896001527,"spend_perlab":"13,134","y":2.966782896001527,"name":"ecology (science)"},{"party":"Others","value":"Camping (outdoors activities)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":12688.56016639628,"total_spenderino":442707,"perc":2.866130457931833,"spend_perlab":"12,689","y":2.866130457931833,"name":"Camping (outdoors activities)"},{"party":"Others","value":"Earth Day","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":12109.2896034876,"total_spenderino":442707,"perc":2.735283066110903,"spend_perlab":"12,109","y":2.735283066110903,"name":"Earth Day"},{"party":"Others","value":"backpacking  (travel)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":12109.2896034876,"total_spenderino":442707,"perc":2.735283066110903,"spend_perlab":"12,109","y":2.735283066110903,"name":"backpacking  (travel)"},{"party":"Others","value":"hiking trails (hiking)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":12109.2896034876,"total_spenderino":442707,"perc":2.735283066110903,"spend_perlab":"12,109","y":2.735283066110903,"name":"hiking trails (hiking)"},{"party":"Others","value":"Backpacking (wilderness)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":11147.25566269129,"total_spenderino":442707,"perc":2.517975921476572,"spend_perlab":"11,147","y":2.517975921476572,"name":"Backpacking (wilderness)"},{"party":"Others","value":"Nature (science)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":11137.33120035272,"total_spenderino":442707,"perc":2.515734153820184,"spend_perlab":"11,137","y":2.515734153820184,"name":"Nature (science)"},{"party":"Others","value":"Vegetarianism (diets)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":11051.54527063118,"total_spenderino":442707,"perc":2.496356567804706,"spend_perlab":"11,052","y":2.496356567804706,"name":"Vegetarianism (diets)"},{"party":"Others","value":"Environmental science (science)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":10678.75075472512,"total_spenderino":442707,"perc":2.412148611773728,"spend_perlab":"10,679","y":2.412148611773728,"name":"Environmental science (science)"},{"party":"Others","value":"Sustainable energy (energy and utilities)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":10620.37057836041,"total_spenderino":442707,"perc":2.398961520454931,"spend_perlab":"10,620","y":2.398961520454931,"name":"Sustainable energy (energy and utilities)"},{"party":"Others","value":"Renewable energy (energy and utilities)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":10369.01033410018,"total_spenderino":442707,"perc":2.342183506043542,"spend_perlab":"10,369","y":2.342183506043542,"name":"Renewable energy (energy and utilities)"},{"party":"Others","value":"Solar energy (energy and utilities)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":10369.01033410018,"total_spenderino":442707,"perc":2.342183506043542,"spend_perlab":"10,369","y":2.342183506043542,"name":"Solar energy (energy and utilities)"},{"party":"Others","value":"Efficient energy use (energy and utilities)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":10326.32041224944,"total_spenderino":442707,"perc":2.332540577006788,"spend_perlab":"10,326","y":2.332540577006788,"name":"Efficient energy use (energy and utilities)"},{"party":"Others","value":"Solar panel (energy and utilities)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":10326.32041224944,"total_spenderino":442707,"perc":2.332540577006788,"spend_perlab":"10,326","y":2.332540577006788,"name":"Solar panel (energy and utilities)"},{"party":"Others","value":"Solar power (energy and utilities)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":10326.32041224944,"total_spenderino":442707,"perc":2.332540577006788,"spend_perlab":"10,326","y":2.332540577006788,"name":"Solar power (energy and utilities)"},{"party":"Others","value":"Sustainable agriculture (agriculture)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":9708.822226819058,"total_spenderino":442707,"perc":2.193058213856808,"spend_perlab":"9,709","y":2.193058213856808,"name":"Sustainable agriculture (agriculture)"},{"party":"Others","value":"national park (tourist destinations)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":9479.410530781872,"total_spenderino":442707,"perc":2.141238004093423,"spend_perlab":"9,479","y":2.141238004093423,"name":"national park (tourist destinations)"},{"party":"Others","value":"Household income: top 10% of ZIP codes (US)","is_exclusion":"FALSE","detailed_type":"DEMOGRAPHICS","total_spend":9433.8686441152,"total_spenderino":442707,"perc":2.130950864593331,"spend_perlab":"9,434","y":2.130950864593331,"name":"Household income: top 10% of ZIP codes (US)"},{"party":"Others","value":"Household income: top 10-25% of ZIP codes (US)","is_exclusion":"FALSE","detailed_type":"DEMOGRAPHICS","total_spend":9433.8686441152,"total_spenderino":442707,"perc":2.130950864593331,"spend_perlab":"9,434","y":2.130950864593331,"name":"Household income: top 10-25% of ZIP codes (US)"}],"type":"bar","color":"#cccccc"}],"xAxis":{"type":"category","title":"","labels":{"style":{"fontSize":"10px"}}},"tooltip":{"pointFormat":"<b>{point.value}<\/b><br>% of total budget spent: {point.y:.1f}%<br>a total of ${point.spend_perlab} on ads including this audience.","headerFormat":""}},"theme":{"colors":["#0266C8","#F90101","#F2B50F","#00933B"],"chart":{"style":{"fontFamily":"Roboto","color":"#444444"}},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#C0C0C0","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Roboto","debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="row">
+<div style="width: 50%; float: left;">
+<div id="htmlwidget-2e5a64c43d2a449ab474" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2e5a64c43d2a449ab474">{"x":{"hc_opts":{"chart":{"reflow":true,"height":500},"title":{"text":"Progressive orgs and media","align":"left","style":{"fontWeight":"bold"}},"yAxis":{"title":{"text":"% party budget spent on targeting audience"},"type":"linear","max":11.73736939595421},"credits":{"enabled":false},"exporting":{"enabled":true},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}},"bar":{"horizontal":true,"stacking":"normal"}},"series":[{"group":"group","data":[{"party":"Progressive orgs and media","value":"Spotify (streaming service)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":65060.23856177417,"total_spenderino":554300,"perc":11.73736939595421,"spend_perlab":"65,060","y":11.73736939595421,"name":"Spotify (streaming service)"},{"party":"Progressive orgs and media","value":"Travel (travel and tourism)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60601.63958884055,"total_spenderino":554300,"perc":10.93300371438581,"spend_perlab":"60,602","y":10.93300371438581,"name":"Travel (travel and tourism)"},{"party":"Progressive orgs and media","value":"Football fans (moderate content engagement)","is_exclusion":"FALSE","detailed_type":"BEHAVIORS","total_spend":60436.80777833969,"total_spenderino":554300,"perc":10.90326678303079,"spend_perlab":"60,437","y":10.90326678303079,"name":"Football fans (moderate content engagement)"},{"party":"Progressive orgs and media","value":"Apple Music","is_exclusion":"FALSE","detailed_type":"DEMOGRAPHICS","total_spend":60436.80777833969,"total_spenderino":554300,"perc":10.90326678303079,"spend_perlab":"60,437","y":10.90326678303079,"name":"Apple Music"},{"party":"Progressive orgs and media","value":"Hip hop","is_exclusion":"FALSE","detailed_type":"DEMOGRAPHICS","total_spend":60436.80777833969,"total_spenderino":554300,"perc":10.90326678303079,"spend_perlab":"60,437","y":10.90326678303079,"name":"Hip hop"},{"party":"Progressive orgs and media","value":"Performing arts","is_exclusion":"FALSE","detailed_type":"DEMOGRAPHICS","total_spend":60436.80777833969,"total_spenderino":554300,"perc":10.90326678303079,"spend_perlab":"60,437","y":10.90326678303079,"name":"Performing arts"},{"party":"Progressive orgs and media","value":"Ballet (dance)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"total_spenderino":554300,"perc":10.90326678303079,"spend_perlab":"60,437","y":10.90326678303079,"name":"Ballet (dance)"},{"party":"Progressive orgs and media","value":"Baseball (sport)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"total_spenderino":554300,"perc":10.90326678303079,"spend_perlab":"60,437","y":10.90326678303079,"name":"Baseball (sport)"},{"party":"Progressive orgs and media","value":"Basketball (sport)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"total_spenderino":554300,"perc":10.90326678303079,"spend_perlab":"60,437","y":10.90326678303079,"name":"Basketball (sport)"},{"party":"Progressive orgs and media","value":"Culture (social concept)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"total_spenderino":554300,"perc":10.90326678303079,"spend_perlab":"60,437","y":10.90326678303079,"name":"Culture (social concept)"},{"party":"Progressive orgs and media","value":"Dance (art)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"total_spenderino":554300,"perc":10.90326678303079,"spend_perlab":"60,437","y":10.90326678303079,"name":"Dance (art)"},{"party":"Progressive orgs and media","value":"Festival (event)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"total_spenderino":554300,"perc":10.90326678303079,"spend_perlab":"60,437","y":10.90326678303079,"name":"Festival (event)"},{"party":"Progressive orgs and media","value":"Football (sports)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"total_spenderino":554300,"perc":10.90326678303079,"spend_perlab":"60,437","y":10.90326678303079,"name":"Football (sports)"},{"party":"Progressive orgs and media","value":"Gaming (video games)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"total_spenderino":554300,"perc":10.90326678303079,"spend_perlab":"60,437","y":10.90326678303079,"name":"Gaming (video games)"},{"party":"Progressive orgs and media","value":"Hockey (sports)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"total_spenderino":554300,"perc":10.90326678303079,"spend_perlab":"60,437","y":10.90326678303079,"name":"Hockey (sports)"},{"party":"Progressive orgs and media","value":"Journalism (news service)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"total_spenderino":554300,"perc":10.90326678303079,"spend_perlab":"60,437","y":10.90326678303079,"name":"Journalism (news service)"},{"party":"Progressive orgs and media","value":"Music (entertainment and media)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"total_spenderino":554300,"perc":10.90326678303079,"spend_perlab":"60,437","y":10.90326678303079,"name":"Music (entertainment and media)"},{"party":"Progressive orgs and media","value":"Music festivals (events)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"total_spenderino":554300,"perc":10.90326678303079,"spend_perlab":"60,437","y":10.90326678303079,"name":"Music festivals (events)"},{"party":"Progressive orgs and media","value":"NASCAR (motor sports)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"total_spenderino":554300,"perc":10.90326678303079,"spend_perlab":"60,437","y":10.90326678303079,"name":"NASCAR (motor sports)"},{"party":"Progressive orgs and media","value":"NBA All-Star Game","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"total_spenderino":554300,"perc":10.90326678303079,"spend_perlab":"60,437","y":10.90326678303079,"name":"NBA All-Star Game"}],"type":"bar","color":"#8BC7FC"}],"xAxis":{"type":"category","title":"","labels":{"style":{"fontSize":"10px"}}},"tooltip":{"pointFormat":"<b>{point.value}<\/b><br>% of total budget spent: {point.y:.1f}%<br>a total of ${point.spend_perlab} on ads including this audience.","headerFormat":""}},"theme":{"colors":["#0266C8","#F90101","#F2B50F","#00933B"],"chart":{"style":{"fontFamily":"Roboto","color":"#444444"}},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#C0C0C0","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Roboto","debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+<div style="width: 50%; float: left;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><br></p>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<p>Among the detailed options offered by Meta, the chart below shows the most excluded target audiences per party. The ranking is based on the amounts spent.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">24 Feb - 25 Mar 2025</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">19 Mar - 25 Mar 2025</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+No data (yet).
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+No data (yet).
+</div>
+</div>
+</div>
+<p><br></p>
+</div>
+<div id="tabset-4-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-3-tab">
+<p>The charts below show the target audiences where most competition takes place. For example, the groups in which all parties invest large amounts to reach voters with the same interests.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">24 Feb - 25 Mar 2025</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">19 Mar - 25 Mar 2025</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div class="highchart html-widget html-fill-item" id="htmlwidget-e3b614f76c264b91955f" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-e3b614f76c264b91955f">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":"% of budget spent on targeting method"},"type":"linear","labels":{"format":"{value}%"},"max":100,"min":0},"credits":{"enabled":true,"text":"Source: Meta Ad Library and data compiled by Who Targets Me. Data Viz: Fabio Votta (@favstats)."},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":true},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}},"bar":{"stacking":"normal"}},"series":[{"name":"Conservative orgs and media","data":[{"party":"Conservative orgs and media","value":"INTERESTS: NBA TV","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":100439.6051216647,"n":2,"total_spenderino":367790.2254288303,"perc":27.30893813302289,"labb":null,"colors":"#9B151A","y":27.30893813302289,"color":"#9B151A","name":"INTERESTS: NBA TV"},{"party":"Conservative orgs and media","value":"INTERESTS: NFL Network","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":100439.6051216647,"n":2,"total_spenderino":367790.2254288303,"perc":27.30893813302289,"labb":null,"colors":"#9B151A","y":27.30893813302289,"color":"#9B151A","name":"INTERESTS: NFL Network"},{"party":"Conservative orgs and media","value":"INTERESTS: NFL on Fox","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":100439.6051216647,"n":2,"total_spenderino":367790.2254288303,"perc":27.30893813302289,"labb":null,"colors":"#9B151A","y":27.30893813302289,"color":"#9B151A","name":"INTERESTS: NFL on Fox"},{"party":"Conservative orgs and media","value":"INTERESTS: Sports (sports)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":70516.31281910761,"n":2,"total_spenderino":337866.9331262732,"perc":20.87103113838995,"labb":null,"colors":"#9B151A","y":20.87103113838995,"color":"#9B151A","name":"INTERESTS: Sports (sports)"},{"party":"Conservative orgs and media","value":"INTERESTS: Baseball (sport)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":69278.67140122877,"n":2,"total_spenderino":336629.2917083944,"perc":20.58010788355326,"labb":null,"colors":"#9B151A","y":20.58010788355326,"color":"#9B151A","name":"INTERESTS: Baseball (sport)"},{"party":"Conservative orgs and media","value":"INTERESTS: Basketball (sport)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":65516.33643585598,"n":2,"total_spenderino":332866.9567430216,"perc":19.68243921743052,"labb":null,"colors":"#9B151A","y":19.68243921743052,"color":"#9B151A","name":"INTERESTS: Basketball (sport)"},{"party":"Conservative orgs and media","value":"INTERESTS: NASCAR (motor sports)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":4560.013568895499,"n":2,"total_spenderino":271910.6338760611,"perc":1.677026567108805,"labb":null,"colors":"#9B151A","y":1.677026567108805,"color":"#9B151A","name":"INTERESTS: NASCAR (motor sports)"},{"party":"Conservative orgs and media","value":"INTERESTS: National Football League (American football league)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":2744.997060040801,"n":2,"total_spenderino":270095.6173672064,"perc":1.016305664933786,"labb":null,"colors":"#9B151A","y":1.016305664933786,"color":"#9B151A","name":"INTERESTS: National Football League (American football league)"},{"party":"Conservative orgs and media","value":"INTERESTS: Football (sports)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":2201.367054206423,"n":2,"total_spenderino":269551.987361372,"perc":0.8166762470406806,"labb":null,"colors":"#9B151A","y":0.8166762470406806,"color":"#9B151A","name":"INTERESTS: Football (sports)"}],"type":"bar","showInLegend":true},{"name":"Others","data":[{"party":"Others","value":"INTERESTS: Journalism (news service)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":29469.81472551606,"n":2,"total_spenderino":296820.4350326817,"perc":9.928499270028784,"labb":null,"colors":"#cccccc","y":9.928499270028784,"color":"#cccccc","name":"INTERESTS: Journalism (news service)"}],"type":"bar","showInLegend":true},{"name":"Progressive orgs and media","data":[{"party":"Progressive orgs and media","value":"INTERESTS: Baseball (sport)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"n":2,"total_spenderino":336629.2917083944,"perc":79.41989211644675,"labb":null,"colors":"#8BC7FC","y":79.41989211644675,"color":"#8BC7FC","name":"INTERESTS: Baseball (sport)"},{"party":"Progressive orgs and media","value":"INTERESTS: Basketball (sport)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"n":2,"total_spenderino":332866.9567430216,"perc":80.31756078256946,"labb":null,"colors":"#8BC7FC","y":80.31756078256946,"color":"#8BC7FC","name":"INTERESTS: Basketball (sport)"},{"party":"Progressive orgs and media","value":"INTERESTS: Football (sports)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"n":2,"total_spenderino":269551.987361372,"perc":99.18332375295932,"labb":null,"colors":"#8BC7FC","y":99.18332375295932,"color":"#8BC7FC","name":"INTERESTS: Football (sports)"},{"party":"Progressive orgs and media","value":"INTERESTS: Journalism (news service)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"n":2,"total_spenderino":296820.4350326817,"perc":90.07150072997121,"labb":null,"colors":"#8BC7FC","y":90.07150072997121,"color":"#8BC7FC","name":"INTERESTS: Journalism (news service)"},{"party":"Progressive orgs and media","value":"INTERESTS: NASCAR (motor sports)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"n":2,"total_spenderino":271910.6338760611,"perc":98.32297343289119,"labb":null,"colors":"#8BC7FC","y":98.32297343289119,"color":"#8BC7FC","name":"INTERESTS: NASCAR (motor sports)"},{"party":"Progressive orgs and media","value":"INTERESTS: NBA TV","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"n":2,"total_spenderino":367790.2254288303,"perc":72.69106186697711,"labb":null,"colors":"#8BC7FC","y":72.69106186697711,"color":"#8BC7FC","name":"INTERESTS: NBA TV"},{"party":"Progressive orgs and media","value":"INTERESTS: NFL Network","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"n":2,"total_spenderino":367790.2254288303,"perc":72.69106186697711,"labb":null,"colors":"#8BC7FC","y":72.69106186697711,"color":"#8BC7FC","name":"INTERESTS: NFL Network"},{"party":"Progressive orgs and media","value":"INTERESTS: NFL on Fox","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"n":2,"total_spenderino":367790.2254288303,"perc":72.69106186697711,"labb":null,"colors":"#8BC7FC","y":72.69106186697711,"color":"#8BC7FC","name":"INTERESTS: NFL on Fox"},{"party":"Progressive orgs and media","value":"INTERESTS: National Football League (American football league)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"n":2,"total_spenderino":270095.6173672064,"perc":98.9836943350662,"labb":null,"colors":"#8BC7FC","y":98.9836943350662,"color":"#8BC7FC","name":"INTERESTS: National Football League (American football league)"},{"party":"Progressive orgs and media","value":"INTERESTS: Sports (sports)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":267350.6203071656,"n":2,"total_spenderino":337866.9331262732,"perc":79.12896886161006,"labb":null,"colors":"#8BC7FC","y":79.12896886161006,"color":"#8BC7FC","name":"INTERESTS: Sports (sports)"}],"type":"bar","showInLegend":true}],"xAxis":{"type":"category","title":{"text":"Targeting criteria"},"labels":{"style":{"fontSize":"10px"}},"categories":["INTERESTS: Baseball (sport)","INTERESTS: Basketball (sport)","INTERESTS: Football (sports)","INTERESTS: Journalism (news service)","INTERESTS: NASCAR (motor sports)","INTERESTS: NBA TV","INTERESTS: NFL Network","INTERESTS: NFL on Fox","INTERESTS: National Football League (American football league)","INTERESTS: Sports (sports)"]},"tooltip":{"pointFormat":"<b>{point.party}<\/b><br>..makes up {point.y:.1f}% of total budget spent on {point.value}. <br>..a total of ${point.total_spend:.0f} on this audience.<br><br>Total Expenditure on audience is ${point.total_spenderino:.0f}.","headerFormat":""},"legend":{"enabled":true,"verticalAlign":"bottom","layout":"horizontal"},"colors":["#9B151A","#cccccc","#8BC7FC"]},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div class="highchart html-widget html-fill-item" id="htmlwidget-cfcded6139386d01c42c" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-cfcded6139386d01c42c">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":"% of budget spent on targeting method"},"type":"linear","labels":{"format":"{value}%"},"max":100,"min":0},"credits":{"enabled":true,"text":"Source: Meta Ad Library and data compiled by Who Targets Me. Data Viz: Fabio Votta (@favstats)."},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":true},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}},"bar":{"stacking":"normal"}},"series":[{"name":"Conservative orgs and media","data":[{"party":"Conservative orgs and media","value":"INTERESTS: NBA TV","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":25727.2701667798,"n":2,"total_spenderino":86164.07794511948,"perc":29.85846396820526,"labb":null,"colors":"#9B151A","y":29.85846396820526,"color":"#9B151A","name":"INTERESTS: NBA TV"},{"party":"Conservative orgs and media","value":"INTERESTS: NFL Network","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":25727.2701667798,"n":2,"total_spenderino":86164.07794511948,"perc":29.85846396820526,"labb":null,"colors":"#9B151A","y":29.85846396820526,"color":"#9B151A","name":"INTERESTS: NFL Network"},{"party":"Conservative orgs and media","value":"INTERESTS: NFL on Fox","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":25727.2701667798,"n":2,"total_spenderino":86164.07794511948,"perc":29.85846396820526,"labb":null,"colors":"#9B151A","y":29.85846396820526,"color":"#9B151A","name":"INTERESTS: NFL on Fox"},{"party":"Conservative orgs and media","value":"INTERESTS: Baseball (sport)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":22931.61398406912,"n":2,"total_spenderino":83368.42176240881,"perc":27.50635492347666,"labb":null,"colors":"#9B151A","y":27.50635492347666,"color":"#9B151A","name":"INTERESTS: Baseball (sport)"},{"party":"Conservative orgs and media","value":"INTERESTS: Basketball (sport)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":21761.37652346339,"n":2,"total_spenderino":82198.18430180308,"perc":26.47427885214982,"labb":null,"colors":"#9B151A","y":26.47427885214982,"color":"#9B151A","name":"INTERESTS: Basketball (sport)"},{"party":"Conservative orgs and media","value":"INTERESTS: Sports (sports)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":21761.37652346339,"n":2,"total_spenderino":82198.18430180308,"perc":26.47427885214982,"labb":null,"colors":"#9B151A","y":26.47427885214982,"color":"#9B151A","name":"INTERESTS: Sports (sports)"},{"party":"Conservative orgs and media","value":"INTERESTS: NASCAR (motor sports)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":645.4441148948051,"n":2,"total_spenderino":61082.25189323449,"perc":1.05668028746382,"labb":null,"colors":"#9B151A","y":1.05668028746382,"color":"#9B151A","name":"INTERESTS: NASCAR (motor sports)"},{"party":"Conservative orgs and media","value":"INTERESTS: Football (sports)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":409.3526097425031,"n":2,"total_spenderino":60846.16038808219,"perc":0.6727665429200724,"labb":null,"colors":"#9B151A","y":0.6727665429200724,"color":"#9B151A","name":"INTERESTS: Football (sports)"},{"party":"Conservative orgs and media","value":"INTERESTS: Music (entertainment and media)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":280.2799552232701,"n":2,"total_spenderino":60717.08773356296,"perc":0.4616162692999817,"labb":null,"colors":"#9B151A","y":0.4616162692999817,"color":"#9B151A","name":"INTERESTS: Music (entertainment and media)"}],"type":"bar","showInLegend":true},{"name":"Others","data":[{"party":"Others","value":"INTERESTS: Journalism (news service)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":7002.05718188216,"n":2,"total_spenderino":67438.86496022185,"perc":10.38282181352289,"labb":null,"colors":"#cccccc","y":10.38282181352289,"color":"#cccccc","name":"INTERESTS: Journalism (news service)"}],"type":"bar","showInLegend":true},{"name":"Progressive orgs and media","data":[{"party":"Progressive orgs and media","value":"INTERESTS: Baseball (sport)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"n":2,"total_spenderino":83368.42176240881,"perc":72.49364507652335,"labb":null,"colors":"#8BC7FC","y":72.49364507652335,"color":"#8BC7FC","name":"INTERESTS: Baseball (sport)"},{"party":"Progressive orgs and media","value":"INTERESTS: Basketball (sport)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"n":2,"total_spenderino":82198.18430180308,"perc":73.52572114785018,"labb":null,"colors":"#8BC7FC","y":73.52572114785018,"color":"#8BC7FC","name":"INTERESTS: Basketball (sport)"},{"party":"Progressive orgs and media","value":"INTERESTS: Football (sports)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"n":2,"total_spenderino":60846.16038808219,"perc":99.32723345707993,"labb":null,"colors":"#8BC7FC","y":99.32723345707993,"color":"#8BC7FC","name":"INTERESTS: Football (sports)"},{"party":"Progressive orgs and media","value":"INTERESTS: Journalism (news service)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"n":2,"total_spenderino":67438.86496022185,"perc":89.6171781864771,"labb":null,"colors":"#8BC7FC","y":89.6171781864771,"color":"#8BC7FC","name":"INTERESTS: Journalism (news service)"},{"party":"Progressive orgs and media","value":"INTERESTS: Music (entertainment and media)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"n":2,"total_spenderino":60717.08773356296,"perc":99.53838373070002,"labb":null,"colors":"#8BC7FC","y":99.53838373070002,"color":"#8BC7FC","name":"INTERESTS: Music (entertainment and media)"},{"party":"Progressive orgs and media","value":"INTERESTS: NASCAR (motor sports)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"n":2,"total_spenderino":61082.25189323449,"perc":98.94331971253618,"labb":null,"colors":"#8BC7FC","y":98.94331971253618,"color":"#8BC7FC","name":"INTERESTS: NASCAR (motor sports)"},{"party":"Progressive orgs and media","value":"INTERESTS: NBA TV","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"n":2,"total_spenderino":86164.07794511948,"perc":70.14153603179474,"labb":null,"colors":"#8BC7FC","y":70.14153603179474,"color":"#8BC7FC","name":"INTERESTS: NBA TV"},{"party":"Progressive orgs and media","value":"INTERESTS: NFL Network","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"n":2,"total_spenderino":86164.07794511948,"perc":70.14153603179474,"labb":null,"colors":"#8BC7FC","y":70.14153603179474,"color":"#8BC7FC","name":"INTERESTS: NFL Network"},{"party":"Progressive orgs and media","value":"INTERESTS: NFL on Fox","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"n":2,"total_spenderino":86164.07794511948,"perc":70.14153603179474,"labb":null,"colors":"#8BC7FC","y":70.14153603179474,"color":"#8BC7FC","name":"INTERESTS: NFL on Fox"},{"party":"Progressive orgs and media","value":"INTERESTS: Sports (sports)","is_exclusion":"FALSE","detailed_type":"INTERESTS","total_spend":60436.80777833969,"n":2,"total_spenderino":82198.18430180308,"perc":73.52572114785018,"labb":null,"colors":"#8BC7FC","y":73.52572114785018,"color":"#8BC7FC","name":"INTERESTS: Sports (sports)"}],"type":"bar","showInLegend":true}],"xAxis":{"type":"category","title":{"text":"Targeting criteria"},"labels":{"style":{"fontSize":"10px"}},"categories":["INTERESTS: Baseball (sport)","INTERESTS: Basketball (sport)","INTERESTS: Football (sports)","INTERESTS: Journalism (news service)","INTERESTS: Music (entertainment and media)","INTERESTS: NASCAR (motor sports)","INTERESTS: NBA TV","INTERESTS: NFL Network","INTERESTS: NFL on Fox","INTERESTS: Sports (sports)"]},"tooltip":{"pointFormat":"<b>{point.party}<\/b><br>..makes up {point.y:.1f}% of total budget spent on {point.value}. <br>..a total of ${point.total_spend:.0f} on this audience.<br><br>Total Expenditure on audience is ${point.total_spenderino:.0f}.","headerFormat":""},"legend":{"enabled":true,"verticalAlign":"bottom","layout":"horizontal"},"colors":["#9B151A","#cccccc","#8BC7FC"]},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

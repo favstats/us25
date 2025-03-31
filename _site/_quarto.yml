@@ -3,7 +3,7 @@ project:
   output-dir: ../docs
 
 website:
-  title: "European Parliament Elections 2024"
+  title: "US Targeting Dashboard"
   favicon: "wtm_logo_2020_transparent-150x150.png"
   navbar:
     logo: "wtm_logo_2020_transparent-300x300.png"

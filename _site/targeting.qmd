@@ -35,6 +35,20 @@ pacman::p_load(knitr, tidyverse, rmarkdown, openxlsx, sf, shiny, rvest)
 source(here::here("utils.R"))
 source(here::here("party_utils.R"))
 
+color_dat <- color_dat %>% 
+  mutate(colors = case_when(
+    colors == "orange" ~ "#f77604",
+    colors == "green" ~ "#7aba2d",
+    colors == "darkgray" ~ "#A9A9A9",
+    colors == "darkblue" ~ "#000080",
+    colors == "lightblue" ~ "#ADD8E6",
+    colors == "#ccc" ~ "#cccccc",
+    is.na(colors) ~ "#00BFFF",
+    T ~ colors
+  ))
+
+sets <- list(cntry = "AU")
+
 ```
 
 
@@ -70,7 +84,7 @@ library(tidytable)
   
   
 election_dat30 <- election_dat30 %>% 
-    mutate(total_spend = euro_spend) 
+    mutate(total_spend = total_spend_formatted) 
 # t1 <- Sys.time()
 
   col_each30 <- election_dat30 %>%
@@ -112,8 +126,8 @@ gg <- col_each30  %>%
   add_count(target) %>%
   # filter(n == 3) %>%
   mutate(target = case_when(
-    target == "custom_audience" ~ "Custom Audiences",
-    target == "countries" ~ "GEOGRAPHY: Entire Country",
+      target == "custom_audience" ~ "Custom Audiences (Internal Data)",
+      target == "custom_audience_thirdparty" ~ "Custom Audiences (Uploaded Data)",    target == "countries" ~ "GEOGRAPHY: Entire Country",
     target == "regions" ~ "GEOGRAPHY: Regions",
     target == "lookalike_audience" ~ "Lookalike Audiences",
     target == "interest" ~ "Detailed",
@@ -199,7 +213,8 @@ plot_geography <- function(x) {
   mutate(perc = spend_per/total*100) %>%
     filter(perc >= 0.5) %>%
     mutate(target = case_when(
-      target == "custom_audience" ~ "Custom Audiences",
+      target == "custom_audience" ~ "Custom Audiences (Internal Data)",
+      target == "custom_audience_thirdparty" ~ "Custom Audiences (Uploaded Data)",
       target == "countries" ~ "GEOGRAPHY: Entire Country",
       target == "regions" ~ "GEOGRAPHY: Regions",
       target == "lookalike_audience" ~ "Lookalike Audiences",
@@ -314,7 +329,7 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 ```{r, fig.width=8, fig.height=5, dpi=300}
 election_dat7 <- election_dat7 %>% 
-    mutate(total_spend = euro_spend) 
+    mutate(total_spend = total_spend_formatted) 
 # t1 <- Sys.time()
 
   col_each7 <- election_dat7 %>%
@@ -344,8 +359,8 @@ gg <- col_each7  %>%
   add_count(target) %>%
   # filter(n == 3) %>%
   mutate(target = case_when(
-    target == "custom_audience" ~ "Custom Audiences",
-    target == "countries" ~ "GEOGRAPHY: Entire Country",
+      target == "custom_audience" ~ "Custom Audiences (Internal Data)",
+      target == "custom_audience_thirdparty" ~ "Custom Audiences (Uploaded Data)",    target == "countries" ~ "GEOGRAPHY: Entire Country",
     target == "regions" ~ "GEOGRAPHY: Regions",
     target == "lookalike_audience" ~ "Lookalike Audiences",
     target == "interest" ~ "Detailed",

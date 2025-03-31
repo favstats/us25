@@ -16,21 +16,24 @@ library(htmltools)
 # sets <- jsonlite::fromJSON(here::here("settings.json"))
 
 # source(here::here("party_utils.R"))
+try({
+  n_advertisers <- read_lines("n_advertisers.txt")
+})
+
+if(!exists("n_advertisers")){
+try({
+  n_advertisers <- read_lines("../n_advertisers.txt")
+})  
+}
+
+
 ```
 
 
 ### Methodology
 
 
-In collaboration with [Who Targets Me](https://whotargets.me/), we monitored `r read_lines("../n_advertisers.txt")` political advertisers to better understand how campaigns use different targeting methods made available by Meta. To do this, we used data from the [Meta Ad Library](https://www.facebook.com/ads/library/), using the new 'Audience' data which gives some detail on how pages target their ads. 
-
-
-
-To better understand the election, we kept only advertisers who:
-
-1. Advertised in the last 7 days (`r read_lines("last7days_string.txt")`)
-2. Advertised in the last 30 days (`r read_lines("last30days_string.txt")`)
-
+In collaboration with [Who Targets Me](https://whotargets.me/), we monitored `r n_advertisers` political advertisers to better understand how campaigns use different targeting methods made available by Meta. To do this, we used data from the [Meta Ad Library](https://www.facebook.com/ads/library/), using the new 'Audience' data which gives some detail on how pages target their ads. 
 
 ::: {.callout-note}
 Meta only provides 7, 30 and 90 days windows for the targeting data in their Ad Library. Meta's data also lags by a few days. Report will be updated as soon as new data is available.
@@ -149,7 +152,6 @@ A list of election dashboards:
 + 🇳🇿 [2023 New Zealand general election](https://favstats.github.io/NZ2023/) (14 October 2023)
 + `r emo::ji("poland")` [2023 Polish parliamentary election](https://favstats.github.io/poland2023/) (15 October 2023)
 + `r emo::ji("us")` [US Presidential Primaries](https://favstats.github.io/USprimaries2024/) (2023-2024)
-
 
 
 

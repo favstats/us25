@@ -19,7 +19,9 @@ t1 <- Sys.time()
 sets <- jsonlite::fromJSON("settings.json")
 
 
-eu_countries <- c("EU","AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE")
+# eu_countries <- c("EU","AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE")
+
+eu_countries <- "US"
 
 # eu_countries %>% 
 #   walk(~{
@@ -27,22 +29,22 @@ eu_countries <- c("EU","AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR
   # })
 
 
-full_cntry_list <- read_rds("https://github.com/favstats/meta_ad_reports/raw/main/cntry_list.rds") %>% 
-  rename(iso2c = iso2,
-         country = cntry) %>% 
-  bind_rows(tibble(iso2c = "EU",
-                   country = "European Union"), .)  %>% 
-  filter(iso2c %in% eu_countries) %>% 
-  # sample_n(n()) %>% 
-  mutate(iso2c = fct_relevel(iso2c, eu_countries)) %>% 
-  arrange(iso2c)# %>% 
+# full_cntry_list <- read_rds("https://github.com/favstats/meta_ad_reports/raw/main/cntry_list.rds") %>% 
+#   rename(iso2c = iso2,
+#          country = cntry) %>% 
+#   # bind_rows(tibble(iso2c = "EU",
+#   #                  country = "European Union"), .)  %>% 
+#   filter(iso2c %in% eu_countries) %>% 
+#   # sample_n(n()) %>% 
+#   mutate(iso2c = fct_relevel(iso2c, eu_countries)) %>% 
+#   arrange(iso2c)# %>% 
   # filter(iso2c %in% c("DE"))
 
 render_it <- function(...) {
   print(...)
   thefile <- str_remove(..., "_site/") %>% str_replace("qmd", "html")
   if(any(str_detect(..., "map"))){
-    if(cntryy == "EU"){
+    if(cntryy == "NY"){
       quarto::quarto_render(..., quiet = T)
     }
   } else {
@@ -53,10 +55,55 @@ render_it <- function(...) {
 }
 render_it <- possibly(render_it, otherwise = NULL, quiet = F)
 
-# cntryy <- "NL"
-for (cntryy in full_cntry_list$iso2c) {
-  # print(cntryy)
+ # <- metatargetr::get_report_db("US", ds = "2025-03-29", timeframe = 30)
 
+unlink("current", recursive = T, force = T)
+
+download.file("https://github.com/favstats/meta_ad_reports/releases/download/US-last_30_days/2025-03-29.zip", "current.zip")
+
+unzip("current.zip", exdir = "current")
+
+# regional_districts <- dir("current/regions",full.names = T)
+# 
+# states <- str_remove_all(
+#   regional_districts,
+#   "^current/regions/FacebookAdLibraryReport_.*?_.*?_.*?_[^_]*(_[^_]*)*_|\\.csv"
+# ) %>% 
+#   as_tibble() %>% 
+#   rename(full = value) %>% 
+#   mutate(full = case_when(
+#     str_detect(full, "District of Columbia") ~ "District of Columbia",
+#     T ~full
+#     
+#   ))
+#   mutate(joined = T)
+#   
+# 
+# library(usmap)
+#   
+# data(statepop)
+# 
+# saveRDS(statepop %>% 
+#           mutate(full = case_when(
+#             str_detect(full, "District of Columbia") ~ "Washington, District of Columbia",
+#             T ~full
+#             
+#           )), "data/statepop.rds")
+# 
+# statepop %>% 
+#   left_join(states) %>% View()
+#   count(joined)
+
+statepop <- readRDS("data/statepop.rds")
+
+
+
+trht <- statepop %>% filter(full != "New York") %>% .$full %>% c("New York",.)
+
+for (cntryy in statepop$full) {
+  # print(cntryy)
+  # cntryy <- "New York"
+  
   t2 <- Sys.time()
 
   print(paste0(cntryy,": ", t2))
@@ -75,8 +122,8 @@ for (cntryy in full_cntry_list$iso2c) {
     }
 
 
-
-    sets$the_country <- full_cntry_list$country[which(full_cntry_list$iso2c==cntryy)]
+    # statepop$full
+    sets$the_country <- statepop$abbr[which(statepop$full==cntryy)]
     sets$cntry <- cntryy
 
     jsonlite::write_json(sets, "settings.json",  simplifyVector = TRUE)
@@ -112,17 +159,17 @@ for (cntryy in full_cntry_list$iso2c) {
 
         dir("docs", full.names = T) %>%
           keep(~str_detect(.x, "site|files")) %>%
-          walk(~fs::dir_copy(.x, str_replace(.x, "docs/", glue::glue("docs/{sets$cntry}/")), overwrite = T))
+          walk(~fs::dir_copy(.x, str_replace(.x, "docs/", glue::glue("docs/{sets$the_country}/")), overwrite = T))
 
         dir("docs", full.names = T) %>%
           keep(~str_detect(.x, "html|json|logo")) %>%
-          walk(~fs::file_copy(.x, str_replace(.x, "docs/", glue::glue("docs/{sets$cntry}/")), overwrite = T))
+          walk(~fs::file_copy(.x, str_replace(.x, "docs/", glue::glue("docs/{sets$the_country}/")), overwrite = T))
 
         # knitr::knit("README.Rmd")
         #
         # rmarkdown::render("logs/overview.Rmd")
         #
-        # file.copy(from = "logs/overview.html", to = glue::glue("docs/{sets$cntry}/overview.html"), overwrite = T)
+        # file.copy(from = "logs/overview.html", to = glue::glue("docs/{sets$the_country}/overview.html"), overwrite = T)
 
         unlink("node_modules", recursive = T, force = T)
         unlink("out", recursive = T, force = T)
@@ -138,8 +185,8 @@ for (cntryy in full_cntry_list$iso2c) {
       # } #else {
 
       #   rmarkdown::render("logs/index.Rmd")
-      #   dir.create(glue::glue("docs/{sets$cntry}"), recursive = T)
-      #   file.copy(from = "logs/index.Rmd", to = glue::glue("docs/{sets$cntry}/index.html"), overwrite = T, recursive = T)
+      #   dir.create(glue::glue("docs/{sets$the_country}"), recursive = T)
+      #   file.copy(from = "logs/index.Rmd", to = glue::glue("docs/{sets$the_country}/index.html"), overwrite = T, recursive = T)
       #
       #   unlink("node_modules", recursive = T, force = T)
       #   unlink("out", recursive = T, force = T)
@@ -172,51 +219,51 @@ for (cntryy in full_cntry_list$iso2c) {
 
 rmarkdown::render("index.Rmd", output_file = "docs/index.html")
 
-fs::file_copy("docs/EU/map.html", "docs/map.html")
-fs::dir_copy("docs/EU/site_libs", "docs/site_libs", overwrite = T)
+fs::file_copy("docs/NY/map.html", "docs/map.html")
+fs::dir_copy("docs/NY/site_libs", "docs/site_libs", overwrite = T)
 
-# dir.create(glue::glue("docs/{sets$cntry}"), recursive = T)
+# dir.create(glue::glue("docs/{sets$the_country}"), recursive = T)
 # file.copy(from = "index.html", to = glue::glue("docs/index.html"), overwrite = T)
 # dir(full.names = F) %>%
 #   keep(~str_detect(.x, "_libs")) %>%
 #   walk(~fs::dir_copy(.x, "docs/site_libs", overwrite = T))
 
-
+# eu_countries
 # setwd("C:/Users/favoo/Documents/ep2024")
-full_cntry_list$iso2c %>%
+statepop$abbr %>%
   # .[1] %>% 
   walk_progress( ~ {
     try({
       
     city_name <- .x
-    dir("docs/EU", full.names = T) %>%
+    dir("docs/NY", full.names = T) %>%
       keep( ~ str_detect(.x, "map")) %>%
       walk( ~ fs::file_copy(.x, str_replace(
-        .x, "docs/EU/", glue::glue("docs/{city_name}/")
+        .x, "docs/NY/", glue::glue("docs/{city_name}/")
       ), overwrite = T))
     
-    dir("docs/EU", full.names = T) %>%
+    dir("docs/NY", full.names = T) %>%
       keep( ~ str_detect(.x, "about")) %>%
       walk( ~ fs::file_copy(.x, str_replace(
-        .x, "docs/EU/", glue::glue("docs/{city_name}/")
+        .x, "docs/NY/", glue::glue("docs/{city_name}/")
       ), overwrite = T))
     
-    dir("docs/EU", full.names = T) %>%
+    dir("docs/NY", full.names = T) %>%
       keep(~str_detect(.x, "site|files"))  %>%
       walk( ~ fs::dir_copy(.x, str_replace(
-        .x, "docs/EU/", glue::glue("docs/{city_name}/")
+        .x, "docs/NY/", glue::glue("docs/{city_name}/")
       ), overwrite = T))
     
     })
   })
 
-if (Sys.info()[["effective_user"]] == "fabio" | Sys.info()[["effective_user"]] == "favoo") {
-  # system("git pull")
-  gert::git_pull()
-  # system("git add -A")
-  # system('git commit -m "update"')
-  # system("git push")
-  gert::git_add(".")
-  gert::git_commit("update")
-  gert::git_push()
-}
+# if (Sys.info()[["effective_user"]] == "fabio" | Sys.info()[["effective_user"]] == "favoo") {
+#   # system("git pull")
+#   gert::git_pull()
+#   # system("git add -A")
+#   # system('git commit -m "update"')
+#   # system("git push")
+#   gert::git_add(".")
+#   gert::git_commit("update")
+#   gert::git_push()
+# }

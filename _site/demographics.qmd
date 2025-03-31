@@ -26,12 +26,15 @@ library(tidyverse)
 library(highcharter)
 library(gt)
 
-pacman::p_load(knitr, tidyverse, rmarkdown, openxlsx, sf, shiny, rvest)
+pacman::p_load(knitr, tidyverse, rmarkdown, openxlsx, shiny, rvest)
 
 # here::dr_here()
 source(here::here("utils.R"))
 source(here::here("party_utils.R"))
 
+sets <- list(cntry = "CA")
+
+# election_dat30 %>% count(party)
 ```
 
 ::: {.panel-tabset}
@@ -670,7 +673,7 @@ total_sppppeen <- x %>%
 x %>%
     filter(type == "detailed") %>%
     filter(detailed_type == "DEMOGRAPHICS") %>%
-  filter(!is_exclusion) %>%
+  filter(is_exclusion == FALSE) %>%
     # count(value, sort = T) %>%
     filter(str_detect(value, "Associate degree|Doctorate degree|In college|Master's degree|Some college|Some grad school|High school grad|In high school|Professional degree|Some high school|College grad|In grad school", negate = T)) %>%
     # filter(str_detect(value, "MBO", negate = T)) %>%
@@ -923,7 +926,7 @@ total_sppppeen <- x %>%
 x %>%
     filter(type == "detailed") %>%
     filter(detailed_type == "DEMOGRAPHICS") %>%
-  filter(!is_exclusion) %>%
+  filter(is_exclusion == FALSE) %>%
     # count(value, sort = T) %>%
     filter(str_detect(value, "Associate degree|Doctorate degree|In college|Master's degree|Some college|Some grad school|High school grad|In high school|Professional degree|Some high school|College grad|In grad school")) %>%
     filter(str_detect(value, "MBO", negate = T)) %>%
@@ -1148,7 +1151,7 @@ total_sppppeen <- x %>%
 x %>%
     filter(type == "detailed") %>%
     filter(detailed_type == "DEMOGRAPHICS") %>%
-  filter(!is_exclusion) %>%
+  filter(is_exclusion == FALSE) %>%
     # count(value, sort = T) %>%
     filter(str_detect(value, relationshipstuff)) %>%
     # filter(str_detect(value, "MBO", negate = T)) %>%
